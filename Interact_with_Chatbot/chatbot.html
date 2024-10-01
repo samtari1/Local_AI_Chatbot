@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LLM Response</title>
+</head>
+<body style="height: 100%; margin: 0; display: flex; justify-content: center; align-items: center;">
+    <div style="text-align: center;">
+        <h1>My Chatbot</h1>
+        <p>{{ response }}</p>
+        <form method="GET" action="{% url 'helloFunction' %}">
+            <label for="userInput">Enter your query:</label>
+            <input type="text" name="userInput" placeholder="Chat with me" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+

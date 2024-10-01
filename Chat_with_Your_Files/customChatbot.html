@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LLM Response</title>
+</head>
+<body style="height: 100%; margin: 0; display: flex; justify-content: center; align-items: center;">
+    <div style="text-align: center;">
+        <h1>Custom Chatbot</h1>
+        
+        <h2>Train Chatbot</h2>
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="file">Choose files to upload:</label>
+            <input type="file" id="file" name="files[]" multiple required>
+            <button type="submit">Upload</button>
+        </form>
+        <br />
+        <form method="POST" action="/train">
+            {% csrf_token %}
+            <button type="submit">Train Chatbot</button> {{ alert }}
+        </form>
+        <p>{{ response }}</p> 
+        <form method="GET" action="{% url 'customChatbot' %}">
+            <label for="userInput">Enter your query:</label>
+            <input type="text" name="userInput" placeholder="Chat with me" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+
+

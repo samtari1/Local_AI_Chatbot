@@ -1,0 +1,25 @@
+# Ignore Mac system files
+.DS_Store
+*.pptx  # Ignore PowerPoint files
+
+
+# Ignore node modules (for JavaScript/Node.js projects)
+node_modules/
+
+# Ignore Python cache files (for Python projects)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Ignore logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo

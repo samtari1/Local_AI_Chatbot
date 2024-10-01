@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Response</title>
+    <style>
+        :root {
+            --primary-color: #2575fc;
+            --secondary-color: #6a11cb;
+            --background-gradient: linear-gradient(to right, #6a11cb, #2575fc);
+            --text-color: #333;
+            --button-color: #fff;
+            --button-hover-bg: #4c9fff;
+            --input-border: #ddd;
+            --border-radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--background-gradient);
+            color: var(--text-color);
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        input[type="file"],
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--input-border);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: var(--button-color);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        .response-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Custom Chatbot</h1>
+        <h2>Train Chatbot</h2>
+        
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="file">Choose files to upload:</label>
+            <input type="file" id="file" name="files[]" multiple required>
+            <button type="submit">Upload</button>
+        </form>
+        
+        <form method="POST" action="/train">
+            {% csrf_token %}
+            <button type="submit">Train Chatbot</button> {{ alert }}
+        </form>
+        
+        <div class="response-container">
+            <p>{{ response }}</p>
+        </div>
+        
+        <form method="GET" action="{% url 'customChatbot' %}">
+            <label for="userInput">Enter your query:</label>
+            <input type="text" name="userInput" placeholder="Chat with me" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
